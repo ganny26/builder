@@ -1,0 +1,323 @@
+<div data-aos="fade-up">
+<h3 class="card-title">
+
+
+
+
+	Assets & Liabilities</h3>
+<ul class="nav nav-tabs">
+	<li role="presentation" [ngClass]="{'active':!liability_tab}">
+		<a href="#Assets" id="Assets-tab" role="tab" data-toggle="tab" aria-controls="Assets" aria-expanded="true">
+			<span class="text">Assets</span>
+		</a>
+	</li>
+	<li role="presentation" class="next" [ngClass]="{'active':liability_tab}">
+		<a href="#Liabilities" role="tab" id="Liabilities-tab" data-toggle="tab" aria-controls="Liabilities">
+			<span class="text">Liabilities</span>
+		</a>
+	</li>
+</ul>
+
+			<div id="myTabContent" class="tab-content responsive">
+
+				<div role="tabpanel" class="tab-pane fade in active" [ngClass]="{'active':!liability_tab}" id="Assets" aria-labelledby="home-tab">
+					<div class="form-group ">
+						<form (ngSubmit)="onSubmit()" #basicDetails="ngForm">
+							<div class="row assets">
+								<div class="col-md-4 col-sm-6 has-min-height-106">
+
+									<label for="fname" class="form-label">Assets </label>
+
+									<select class="form-control txtbox" id="assettype" [(ngModel)]="model.assettype" name="assettype" #assettype="ngModel">
+                                       <option  value="0">Select</option>
+                                        <option *ngFor="let details of assetType" [ngValue]= "details.prop_desc"  >
+                                                  {{details.prop_desc}} 
+                                        </option>
+                                    </select>
+										
+								</div>
+
+								<div class="col-md-4 col-sm-6 has-min-height-106">
+									<div class="form-group">
+										<div [ngClass]="{'form-group has-success has-feedback':(assetvalue.valid && assetvalue.dirty && !(model.assetvalue==null) &&  !(model.assetvalue=='')) }">
+											<div [ngClass]="{'form-group has-error has-feedback':(assetvalue.invalid && assetvalue.dirty )}">
+												<label for="assetValue" class="form-label">Value</label>
+												<div class="input-group">
+													<span class="input-group-addon">A$</span>
+													<input type="text" class="form-control txtbox" [(ngModel)]="model.assetvalue" id="assetvalue" name="assetvalue" #assetvalue="ngModel"
+														maxlength="18" (focus)="revert(assetvalue.value,'assetvalue')"  (blur)="AmountFormatter(assetvalue.value,'assetvalue')"
+														 onkeypress="return event.charCode === 0 || /\d/.test(String.fromCharCode(event.charCode));">
+													<span [ngClass]="{'glyphicon glyphicon-ok form-control-feedback':(assetvalue.valid  && assetvalue.dirty && !(model.assetvalue==null) &&  !(model.assetvalue==''))}"></span>
+													<span [ngClass]="{'glyphicon glyphicon-remove form-control-feedback':(assetvalue.invalid && assetvalue.dirty)}"></span>
+												</div>
+												<small [hidden]="assetvalue.valid || (assetvalue.pristine )" class="text-danger">
+                                                        {{configMsg?.amount}}
+                                                        </small>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-6 has-min-height-106">
+									<div class="assest-button-wrapper">
+										<input type="submit" class="btn btn-form-primary ladda-button" [disabled]="assetsLength==MaxLimit || model.assetvalue=='' ||model.assetvalue==null ||model.assettype==0"
+											value="ADD">
+									</div>
+								</div>
+							</div>
+
+
+							<!-- <div class="row">
+                                <div class="form-btn-wrapper">
+                                    <input type="submit" class="btn btn-form-primary ladda-button" value="ADD">
+                                </div>
+                            </div>-->
+
+
+							<div class="row">
+								<div class="row">
+									<div class="col-md-4 col-sm-6 has-min-height-106">
+										<label for="fname" class="form-label">Assets Details</label>
+										<div class=" table-responsive ">
+										<table class="table table-bordered">
+											<thead>
+
+												<tr>
+													<th>Asset Type</th>
+													<th>Asset value</th>
+													<th>Actions</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr *ngFor="let item of assetsDetails; let i=index">
+													<td>{{item.assettype}}</td>
+													<td>{{item.assetvalue}}</td>
+													<td>
+														<span (click)="deleteassets(i)" class="glyphicon glyphicon-trash"></span>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</form>
+						<a tabindex="0" class="btn btn-icon-back"> <img src="/assets/images/back-icon.svg" alt="back-icon" (click)="updateSection()"> </a>
+						<a class="btn btn-form-primary" data-toggle="tab" href="#Liabilities" (click)="addClass()"><span class="ladda-label">NEXT</span></a>
+					</div>
+				</div>
+
+				<div role="tabpanel" class="tab-pane fade in" [ngClass]="{'active':liability_tab}" id="Liabilities" aria-labelledby="Liabilities-tab">
+					<div class="form-group ">
+
+						<form (ngSubmit)="onSubmitLiabilitiesDetails()" #LiabilitiesDetails="ngForm">
+							<div class="row assets">
+								<div class="col-md-4 col-sm-6">
+									<div class="form-group">
+										<label for="lname" class="form-label">Liability type</label>
+										<select class="form-control txtbox" id="Liabilitiestype" [(ngModel)]="model.Liabilitiestype" name="Liabilitiestype" #Liabilitiestype="ngModel">
+                                       <option  value="0">Select</option>
+                                        <option *ngFor="let details of liabilityType" [ngValue]= "details.prop_desc"  >
+                                                  {{details.prop_desc}} 
+                                        </option>
+                                    </select>
+									</div>
+
+								</div>
+								<div class="col-md-4 col-sm-6">
+									<div class="form-group">
+										<div [ngClass]="{'form-group has-success has-feedback':(Payable_Amount.valid && Payable_Amount.dirty && !(model.Payable_Amount==null) &&  !(model.Payable_Amount=='')) }">
+											<div [ngClass]="{'form-group has-error has-feedback':(Payable_Amount.invalid && Payable_Amount.dirty )}">
+												<label for="lname" class="form-label">Payable Amount </label>
+												<div class="input-group">
+													<span class="input-group-addon">A$</span>
+													<input type="text" class="form-control txtbox" [(ngModel)]="model.Payable_Amount" id="Payable_Amount" name="Payable_Amount"
+														#Payable_Amount="ngModel" maxlength="18" (focus)="revert(Payable_Amount.value,'Payable_Amount')"  (blur)="AmountFormatter(Payable_Amount.value,'Payable_Amount')"
+														 onkeypress="return event.charCode === 0 || /\d/.test(String.fromCharCode(event.charCode));">
+													<span [ngClass]="{'glyphicon glyphicon-ok form-control-feedback':(Payable_Amount.valid  && Payable_Amount.dirty && !(model.Payable_Amount==null) &&  !(model.Payable_Amount==''))}"></span>
+													<span [ngClass]="{'glyphicon glyphicon-remove form-control-feedback':(Payable_Amount.invalid && Payable_Amount.dirty)}"></span>
+												</div>
+												<small [hidden]="Payable_Amount.valid || (Payable_Amount.pristine )" class="text-danger">
+                                                        {{configMsg?.amount}}
+                                                        </small>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-6">
+									<div class="form-group">
+										<label for="Payment_Frequency" class="form-label">Payment Frequency </label>
+										<select class="form-control txtbox" id="Payment_Frequency" [(ngModel)]="model.Payment_Frequency" name="Payment_Frequency"
+											#Payment_Frequency="ngModel">
+                                       <option  value="0">Select</option>
+                                        <option *ngFor="let details of freqType" [ngValue]= "details.prop_val"  >
+                                                  {{details.prop_desc}} 
+                                        </option>
+                                    </select>
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-6">
+									<div class="form-group">
+										<div [ngClass]="{'form-group has-success has-feedback':(Balance_Pending.valid && Balance_Pending.dirty && !(model.Balance_Pending==null) &&  !(model.Balance_Pending=='')) }">
+											<div [ngClass]="{'form-group has-error has-feedback':(Balance_Pending.invalid && Balance_Pending.dirty )}">
+												<label for="lname" class="form-label">Balance Pending </label>
+												<div class="input-group">
+													<span class="input-group-addon">A$</span>
+													<input type="text" class="form-control txtbox" [(ngModel)]="model.Balance_Pending" id="Balance_Pending" name="Balance_Pending"
+														#Balance_Pending="ngModel" maxlength="18" (focus)="revert(Balance_Pending.value,'Balance_Pending')"  (blur)="AmountFormatter(Balance_Pending.value,'Balance_Pending')"
+														 onkeypress="return event.charCode === 0 || /\d/.test(String.fromCharCode(event.charCode));">
+													<span [ngClass]="{'glyphicon glyphicon-ok form-control-feedback':(Balance_Pending.valid  && Balance_Pending.dirty && !(model.Balance_Pending==null) &&  !(model.Balance_Pending==''))}"></span>
+													<span [ngClass]="{'glyphicon glyphicon-remove form-control-feedback':(Balance_Pending.invalid && Balance_Pending.dirty)}"></span>
+												</div>
+												<small [hidden]="Balance_Pending.valid || (Balance_Pending.pristine )" class="text-danger">
+                                                        {{configMsg?.amount}}
+                                                        </small>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-6 has-min-height-106">
+									<div class="form-group">
+										<div [ngClass]="{'form-group has-success has-feedback':(Financial_Institution.valid && Financial_Institution.dirty && !(model.Financial_Institution==null) &&  !(model.Financial_Institution=='')) }">
+											<div [ngClass]="{'form-group has-error has-feedback':(Financial_Institution.invalid && Financial_Institution.dirty )}">
+
+												<label for="lname" class="form-label">Financial Institution </label>
+												<input type="text" class="form-control txtbox" [(ngModel)]="model.Financial_Institution" id="Financial_Institution" name="Financial_Institution"
+													#Financial_Institution="ngModel">
+												<span [ngClass]="{'glyphicon glyphicon-ok form-control-feedback':(Financial_Institution.valid  && Financial_Institution.dirty && !(model.Financial_Institution==null) &&  !(model.Financial_Institution==''))}"></span>
+												<span [ngClass]="{'glyphicon glyphicon-remove form-control-feedback':(Financial_Institution.invalid && Financial_Institution.dirty)}"></span>
+												<small [hidden]="Financial_Institution.valid || Financial_Institution.pristine || model.Financial_Institution==null || model.Financial_Institution==''" class="text-danger">
+                                                 {{configMsg?.name}} <!--This is a required field and Can contain letters and apostrophe-->
+                                             </small>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-6 has-min-height-106">
+									<div class="assest-button-wrapper">
+										<input type="submit" class="btn btn-form-primary ladda-button" [disabled]="LiabilitiesLength==MaxLimit || model.Liabilitiestype==0 ||model.Payable_Amount==null ||model.Payment_Frequency==0||model.Balance_Pending==null||model.Financial_Institution==null"
+											value="ADD">
+									</div>
+								</div>
+							</div>
+
+						</form>
+					</div>
+					<div class="row">
+						<div class="row">
+							<div class="col-md-8 col-sm-4 has-min-height-106">
+								<label for="fname" class="form-label">Liabilities Details</label>
+								<div class=" table-responsive ">
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th>Liabilities Type</th>
+											<th>Payable Amount</th>
+											<th>Payment Frequency</th>
+											<th>Balance Pending </th>
+											<th>Financial Institution</th>
+											<th>Actions</th>
+										</tr>
+									</thead>
+									<tbody>
+										<!--{{ assetsDetails }}-->
+										<tr *ngFor="let item of LiabilitiesArray; let i=index">
+
+											<td>{{item.Liabilitiestype}}</td>
+											<td>{{item.Payable_Amount}}</td>
+											<td>{{item.Payment_Frequency}}</td>
+											<td>{{item.Balance_Pending}}</td>
+											<td>{{item.Financial_Institution}}</td>
+											<td>
+												<span (click)="deleteLiabilities(i)" class="glyphicon glyphicon-trash"></span>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								</div>
+							</div>
+
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-btn-wrapper">
+							<a tabindex="0" class="btn btn-icon-back"> <img src="/assets/images/back-icon.svg" alt="back-icon" (click)=" moveToAssets()"> </a>
+							<button type="button" tabindex="0" class="btn btn-form-primary ladda-button" data-dismiss="modal" [ladda]="isLoading"  data-style="expand-right"
+							data-spinner-color="white" 
+								(click)="onSubmitMain()" ><span class="ladda-label">SAVE & CONTINUE</span></button>
+						</div>
+					</div>
+
+	</div>
+</div>
+</div>
+
+
+
+
+<!-- //Page Content -->
+
+
+
+<!-- //wrapper -->
+<div id="success" class="modal fade " role="dialog" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog modal-pop matching-customer-details">
+		<!-- Modal content-->
+		<div class="modal-content ">
+			<div class="modal-body">
+				<div class="success-modal">
+					<button type="button" class="close" data-dismiss="modal" [routerLink]="['/home']" (click)="clear()"><img src="/assets/images/close.svg" alt=""></button>
+					<div class="center-content">
+						<span class="info-icon successicon"><img src="/assets/images/success.svg" alt=""></span>
+						<h2>Success!</h2>
+						<h4>Your {{model.product_type}} request has been submitted successfully.</h4>
+						<div class="existing-member-login">
+							<div class="info-alert  center-msg">
+								<div class="alert-msg"> {{inf_loan}}
+								</div>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+						<div class="customer-details">
+							<div class="details-label">
+								<p class="cust-id">Application Reference</p>
+							</div>
+							<div class="sybmol">
+								<p class="cust-id"> :</p>
+							</div>
+							<div class="cus-details-value">
+								<p class="cust-id"><strong>{{model.application_id}}</strong></p>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<a [routerLink]="['/home']" class="regbtn" data-dismiss="modal" (click)="clear()">HOME</a>
+					 	<a [hidden]="true" id="mlogin" [routerLink]="['/login']" class="regbtn" (click)="clear()" data-dismiss="modal" >LOGIN</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="onlineid-check" class="modal fade " role="dialog" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog modal-pop matching-customer-details">
+		<!-- Modal content-->
+		<div class="modal-content ">
+			<div class="modal-body">
+				<div class="matching-customer-des online-id-check">
+					<div class="center-content">
+						<span class="info-icon"><img src="/assets/images/onlineid-user.svg" alt=""></span>
+						<h2>Please perform an <br> online ID check
+						</h2>
+						<div class="online-check-links"> <a class="skip-btn" data-toggle="modal" data-dismiss="modal" (click)="successAccount()">skip</a>
+							<a [routerLink]="['../onlineIdCheck']" class="btn btn-form-primary" data-dismiss="modal">CHECK NOW</a>
+						</div>
+						<br>
+						<br>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

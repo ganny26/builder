@@ -1,0 +1,47 @@
+ 
+               <div data-aos="fade-up">
+               <h3 class="card-title">Loan Summary</h3>
+               <div class="row">
+                        <div class="col-md-4 col-sm-6">
+                                <label class="form-label">Total Loan Amount</label><br/>
+                                <p>{{amtbrrow}}</p>
+                        </div>
+                   
+                        <div class="col-md-4 col-sm-6">
+                                <label class="form-label">Term</label><br/>
+                                <p>{{model.loanterm}}</p>
+                        </div>
+
+                        <div class="col-md-4 col-sm-6">
+                            <label class="form-label">Interest Rate</label><br/>
+                                <p>3.89%</p>
+                        </div>
+                </div>
+
+                <div class="row">
+                        <div class="col-md-4 col-sm-6">
+                                <label class="form-label">Repayment amount</label><br/>
+                                <p>{{repaymentamount}}</p>
+                        </div>
+                   
+                        <div class="col-md-4 col-sm-6">
+                                <label class="form-label">Repayment Frequency</label><br/>
+                                <p>{{model.frequencyType}}</p>
+                        </div>
+
+                        <div class="col-md-4 col-sm-6">
+                            <label class="form-label">Interest Type</label><br/>
+                                <p>{{model.interesttype}}</p>
+                        </div>
+                </div>
+                <div class="row">
+                        <div class="col-md-4 col-sm-6">
+                                <label class="form-label">Repayment Type</label><br/>
+                                <p>{{model.repaymenttype}}</p>
+                        </div>
+                </div>
+                 <a tabindex="0"  class="btn btn-icon-back">  <img src="/assets/images/back-icon.svg" alt="back-icon" (click)="updateSection()"> </a>
+                    <button type="button" tabindex="0" class="btn btn-form-primary ladda-button"  data-dismiss="modal"  [ladda]="isLoading"  data-style="expand-right"
+							data-spinner-color="white" (click)="onSubmit()" ><span class="ladda-label">SAVE & CONTINUE</span></button>
+               </div>
+            <!-- //wrapper -->

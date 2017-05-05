@@ -1,0 +1,149 @@
+<div data-aos="fade-up">
+            
+            <h3 class="card-title">Employment Status</h3>
+            <form class="form" (ngSubmit)="onSubmit()" #basicDetails="ngForm">
+                <div class="row">
+                    <div class="col-md-8 col-sm-12 col-xs-12">
+                        
+                            <fieldset id="interesttype">
+                                <label class="form-label  radio-toolbar"  for="employed1" [ngClass]="{'highlightradio':model.employed=='EMPLOYED'}">
+                                    <div class="form-group">
+                                    <input type="radio" class="styled" name="employed" [checked] id="employed1" [(ngModel)]="model.employed" value="EMPLOYED">
+                                  EMPLOYED
+                                    </div>
+                                </label>
+                                <label class="form-label  radio-toolbar" for="employed2" [ngClass]="{'highlightradio':model.employed=='SELF-EMPLOYED'}"> 
+                                    <div class="form-group">
+                                    <input type="radio"  class="styled"  name="employed" id="employed2" [(ngModel)]="model.employed" value="SELF-EMPLOYED">
+                                   SELF-EMPLOYED
+                                    </div>
+                                </label>
+                            </fieldset>
+
+                        
+
+                    </div>
+                </div>
+                <div class="row" [hidden]="!model.employed=='EMPLOYED' || model.employed=='SELF-EMPLOYED'">
+                    <div class="col-md-4 col-sm-6 has-min-height-106">
+                        <div [ngClass]="{'form-group has-success has-feedback':(employer.valid  && employer.dirty) }">
+                            <div [ngClass]="{'form-group has-error has-feedback':(employer.invalid && employer.dirty )}">
+                                <label for="employer" class="form-label">Employer </label>
+                                <input type="text" [required]="model.employed=='EMPLOYED'" class="form-control txtbox" id="employer" [(ngModel)]="model.employer"
+                                    name="employer" #employer="ngModel" autofocus nameValidate>
+                                <!-- /input-group -->
+                                <span [ngClass]="{'glyphicon glyphicon-ok form-control-feedback':(employer.valid  && employer.dirty)}"></span>
+                                <span [ngClass]="{'glyphicon glyphicon-remove form-control-feedback':(employer.invalid && employer.dirty )}"></span>
+                                <small [hidden]="employer.valid || (employer.pristine )" class="text-danger">
+                                {{configMsg?.mname}}
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 has-min-height-106">
+                        <div [ngClass]="{'form-group has-success has-feedback':(service.valid  && service.dirty) }">
+                            <div [ngClass]="{'form-group has-error has-feedback':(service.invalid && service.dirty )}">
+                                <label for="service" class="form-label">Years Of Service </label>
+                                <input type="number" [required]="model.employed=='EMPLOYED'" class="form-control txtbox" id="service" [(ngModel)]="model.service"
+                                    name="service" #service="ngModel" splitValidator>
+                                <span [ngClass]="{'glyphicon glyphicon-ok form-control-feedback':(service.valid  && service.dirty)}"></span>
+                                <span [ngClass]="{'glyphicon glyphicon-remove form-control-feedback':(service.invalid && service.dirty)}"></span>
+                                <small [hidden]="service.valid || (service.pristine )" class="text-danger">
+                                     {{configMsg?.number1_99}}
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" [hidden]="model.employed=='EMPLOYED'">
+                    <div class="col-md-4 col-sm-6 has-min-height-106">
+                        <div [ngClass]="{'form-group has-success has-feedback':(companyName.valid  && companyName.dirty) }">
+                            <div [ngClass]="{'form-group has-error has-feedback':(companyName.invalid && companyName.dirty )}">
+
+                                <label for="companyName" class="form-label">Company Name </label>
+                                <input type="text" [required]="model.employed=='SELF-EMPLOYED'" class="form-control txtbox" id="companyName" [(ngModel)]="model.companyName"
+                                    name="companyName" #companyName="ngModel">
+                                <span [ngClass]="{'glyphicon glyphicon-ok form-control-feedback':(companyName.valid  && companyName.dirty)}"></span>
+                                <span [ngClass]="{'glyphicon glyphicon-remove form-control-feedback':(companyName.invalid && companyName.dirty )}"></span>
+                                <small [hidden]="companyName.valid || (companyName.pristine )" class="text-danger">
+                                 {{configMsg?.required_v}}
+                                </small>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-4 col-sm-6 has-min-height-106">
+                        <div [ngClass]="{'form-group has-success has-feedback':(yearsEstablished.valid && yearsEstablished.dirty) }">
+                            <div [ngClass]="{'form-group has-error has-feedback':(yearsEstablished.invalid && yearsEstablished.dirty )}">
+                                <label for="yearsEstablished  " class="form-label">Years Established  </label>
+                                <input type="number" [required]="model.employed=='SELF-EMPLOYED'" class="form-control txtbox" id="yearsEstablished" [(ngModel)]="model.yearsEstablished"
+                                    name="yearsEstablished" #yearsEstablished="ngModel" splitValidator>
+                                <span [ngClass]="{'glyphicon glyphicon-ok form-control-feedback':(yearsEstablished.valid && yearsEstablished.dirty)}"></span>
+                                <span [ngClass]="{'glyphicon glyphicon-remove form-control-feedback':(yearsEstablished.invalid && yearsEstablished.dirty)}"></span>
+                                <small [hidden]="yearsEstablished.valid || (yearsEstablished.pristine )" class="text-danger">
+                                 {{configMsg?.number1_99}}
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 col-sm-6 has-min-height-106">
+                        <div class="form-group">
+                            <div [ngClass]="{'form-group has-success has-feedback':(earnPerMonth.valid && earnPerMonth.dirty) }">
+                                <div [ngClass]="{'form-group has-error has-feedback':(earnPerMonth.invalid && earnPerMonth.dirty )}">
+                                    <label for="earnPerMonth" class="form-label">How much do you earn per month?</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">A$</span>
+                                        <input type="text" required class="form-control txtbox" id="earnPerMonth" [(ngModel)]="model.earnPerMonth" name="earnPerMonth"
+                                            #earnPerMonth="ngModel" maxlength="18" (focus)="revert(earnPerMonth.value,'earnPerMonth')"
+                                             (blur)="AmountFormatter(earnPerMonth.value,'earnPerMonth')"  onkeypress="return event.charCode === 0 || /\d/.test(String.fromCharCode(event.charCode));">
+                                        <span [ngClass]="{'glyphicon glyphicon-ok form-control-feedback':(earnPerMonth.valid  && earnPerMonth.dirty)}"></span>
+                                        <span [ngClass]="{'glyphicon glyphicon-remove form-control-feedback':(earnPerMonth.invalid && earnPerMonth.dirty)}"></span>
+                                    </div>
+                                    <small [hidden]="earnPerMonth.valid || (earnPerMonth.pristine )" class="text-danger">
+                                 {{configMsg?.amount}}
+                                </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-4 col-sm-6 has-min-height-106">
+                        <div class="form-group">
+                            <div [ngClass]="{'form-group has-success has-feedback':(monthlyLivingExpenses.valid && monthlyLivingExpenses.dirty) }">
+                                <div [ngClass]="{'form-group has-error has-feedback':(monthlyLivingExpenses.invalid && monthlyLivingExpenses.dirty )}">
+                                    <label for="monthlyLivingExpenses" class="form-label">Estimated monthly living expenses</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">A$</span>
+                                        <input type="text" required class="form-control txtbox" id="monthlyLivingExpenses" [(ngModel)]="model.monthlyLivingExpenses" name="monthlyLivingExpenses"
+                                            #monthlyLivingExpenses="ngModel" maxlength="18" (focus)="revert(monthlyLivingExpenses.value,'monthlyLivingExpenses')"
+                                             (blur)="AmountFormatter(monthlyLivingExpenses.value,'monthlyLivingExpenses')"  onkeypress="return event.charCode === 0 || /\d/.test(String.fromCharCode(event.charCode));">
+                                        <span [ngClass]="{'glyphicon glyphicon-ok form-control-feedback':(monthlyLivingExpenses.valid  && monthlyLivingExpenses.dirty)}"></span>
+                                        <span [ngClass]="{'glyphicon glyphicon-remove form-control-feedback':(monthlyLivingExpenses.invalid && monthlyLivingExpenses.dirty)}"></span>
+                                    </div>
+                                    <small [hidden]="monthlyLivingExpenses.valid || (monthlyLivingExpenses.pristine )" class="text-danger">
+                                 {{configMsg?.amount}}
+                                </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-btn-wrapper">
+                    <a tabindex="0" class="btn btn-icon-back"> <img src="/assets/images/back-icon.svg" alt="back-icon" (click)="updateSection()"> </a>
+                    <!--<a tabindex="0" [routerLink]="['/PersonalBasicInfo']" class="btn btn-icon-back">  <img src="/assets/images/back-icon.svg" alt="back-icon"> </a>-->
+                    <!--<a tabindex="0" class="btn btn-form-primary ladda-button" data-style="expand-right" id="contactInfoSubmit"><span class="ladda-label">CONTINUE</span></a>-->
+                    <button type="submit" tabindex="0" class="btn btn-form-primary ladda-button" data-dismiss="modal" [ladda]="isLoading"  data-style="expand-right"
+							data-spinner-color="white" [disabled]="!(employer.valid || companyName.valid )|| !(service.valid || yearsEstablished.valid) || !earnPerMonth.valid || !monthlyLivingExpenses.valid"><span class="ladda-label">SAVE & CONTINUE</span></button>
+                </div>
+            </form>
+</div>
+       

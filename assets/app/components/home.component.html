@@ -1,0 +1,263 @@
+<oao-header></oao-header>
+<section class="banner">
+	<div class="banner-text">
+		<h1>The easy way to bank with us</h1>
+		<h2>save your money & time</h2>
+		<h6>Every penny or cent spent through wise automatically earns you rewards, special offers and discounts, meaning you’ll always
+			get more for your money.</h6>
+	</div>
+</section>
+<!-- Page Content -->
+<div class="page-content">
+	<div class="container">
+		<!--oao-panel  -->
+		<div class="oao-panel">
+			<div class="panel ">
+				<!--panel-heading  -->
+				<div class="panel-heading">
+					<div class="panel-tilte-wraper">
+						<span class="panel-icon-circle">
+                           <img src="/assets/images/savings_icon.svg" alt="savings_icon">
+                           </span>
+						<span class="panel-title">EVERYDAY ACCOUNT </span>
+					</div>
+					<div class="panel-heading-btn">
+						<a (click)="setModalType('EVR')" class="btn btn-apply" data-toggle="modal">APPLY NOW</a>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<!--//panel-heading  -->
+				<!--panel-body  -->
+				<div class="panel-body">
+					<h6>Best rates Savings Account</h6>
+					<h5 class="interest">Interest rate offered</h5>
+					<h5>Daily balance upto $ 1,000,000 6% p.a = above $ 5,000,000</h5>
+					<div class="category-description">
+						<p>Savings Account interest rate is 4% p.a. interest is calculated on a daily balance. Exclusive Debit Card offers. Apply!
+							in 4 easy steps from home open your account. Interest is calculated on a daily balance. Exclusive Debit Card offers.</p>
+					</div>
+				</div>
+				<!--//panel-body  -->
+			</div>
+		</div>
+		<!--//oao-panel  -->
+
+		<!--oao-panel  -->
+		<div class="oao-panel">
+			<div class="panel ">
+				<!--panel-heading  -->
+				<div class="panel-heading">
+					<div class="panel-tilte-wraper">
+						<span class="panel-icon-circle">
+                           <img src="/assets/images/HML.svg" alt="home_loan_icon">
+                           </span>
+						<span class="panel-title">HOME LOAN </span>
+					</div>
+					<div class="panel-heading-btn">
+						<a (click)="setModalType('HML')" class="btn btn-apply" data-toggle="modal">APPLY NOW</a>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<!--//panel-heading  -->
+				<!--panel-body  -->
+				<div class="panel-body">
+					<h6>Apply your Home Loan online </h6>
+					<h5 class="interest">EMI of just $7800 per $ 1,000,000</h5>
+					<h5>Home Loans @8.5% .p.a. - low processing charges -no prepayment penalties. Exclusive benefits.</h5>
+					<div class="category-description">
+						<p>Home Loan interest rate is 4% p.a. interest is calculated on a daily balance. Exclusive Debit Card offers. Apply! in
+							4 easy steps from home open your account. Interest is calculated on a daily balance. Exclusive Debit Card offers.</p>
+					</div>
+				</div>
+				<!--//panel-body  -->
+			</div>
+		</div>
+		<!--//oao-panel  -->
+		<!--oao-panel  -->
+		<div class="oao-panel">
+			<div class="panel ">
+				<!--panel-heading  -->
+				<div class="panel-heading">
+					<div class="panel-tilte-wraper">
+						<span class="panel-icon-circle">
+                           <img src="/assets/images/PRL.svg" alt="personal_loan_icon">
+                           </span>
+						<span class="panel-title">PERSONAL LOAN</span>
+					</div>
+					<div class="panel-heading-btn">
+						<a (click)="setModalType('PRL')" class="btn btn-apply" data-toggle="modal">APPLY NOW</a>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<!--//panel-heading  -->
+				<!--panel-body  -->
+				<div class="panel-body">
+					<h6>Apply Personal Loans online </h6>
+					<h5 class="interest">Personal Loan @11.49% - compare 17 banks</h5>
+					<h5>Your Personal Loans in 1 minute - get instant online approvals‎.</h5>
+					<div class="category-description">
+						<p>Personal Loan interest rate is 4% p.a. interest is calculated on a daily balance. Exclusive Debit Card offers. Apply!
+							in 4 easy steps from home open your account.Interest is calculated on a daily balance. Exclusive Debit Card offers.</p>
+					</div>
+				</div>
+				<!--//panel-body  -->
+			</div>
+		</div>
+		<!--//oao-panel  -->
+
+	</div>
+	<!-- /.container -->
+</div>
+<!-- //Page Content -->
+<!-- data toggle-->
+<div id="savingsaccount-modal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog modal-pop ">
+		<!-- Modal content-->
+		<div class="modal-content ">
+			<div class="modal-body">
+				<button type="button" class="close" data-dismiss="modal" (click)="setFalse()"><img src="/assets/images/close.svg" alt=""></button>
+				<div class="center-content">
+					<span class="savings-act-icon"><img src="/assets/images/{{img}}.svg" alt=""></span>
+					<h2>Select account type</h2>
+					<div class="modal-pop-footer">
+						<p>Terms & conditions</p>
+						<form #f="ngForm">
+							<div class="term-sondition">
+								<div class="checkbox">
+									<input id="aus_citizen" class="styled term" type="checkbox" [(ngModel)]="modal.aus_citizen" name="aus_citizen" #aus_citizen="ngModel"
+										[checked]="checked"> <label class="fonts" for="aus_citizen">Australian citizen or permanent resident.</label>									<br/>
+								</div>
+								<div class="checkbox">
+									<input id="age_test" class="styled term" type="checkbox" [(ngModel)]="modal.age_test" name="age_test" #age_test="ngModel"
+										[checked]="checked"><label class="fonts" for="age_test"> 18 years of age from the date of the application.</label>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+				
+	<div class="row" id="userTypeRow">
+
+			<div class="existing">
+				<h4>Already a customer banking online with us?</h4>
+				<p>Save time by using your NetBank details.</p>
+				<input [disabled]="!(modal.age_test && modal.aus_citizen)" type="submit" class="btn btn-default" (click)="loginFlag()" href="" [routerLink]="['/login']" data-dismiss="modal"  value="Open in NetBank" />
+			</div>
+			<hr class="visible-xs">
+			<div clss="" id="or"><p>or</p></div>
+			<div  class="new">	
+				<h4>New customer or don't bank online with us?</h4>
+				<p>Open account now.</p>
+				<input [disabled]="!(modal.age_test && modal.aus_citizen)" type="submit" class="btn btn-default" data-dismiss="modal" [routerLink]="['/completeInformation']" value="Open Now" class="btn btn-default">
+			</div>
+		
+	</div>
+			</div><!--content body -->
+		</div>
+	</div>
+</div>
+<!--// data toggle-->
+
+
+
+
+
+<!--chandan-->
+<div id="not_eligible-modal" class="modal fade " role="dialog">
+         <div class="modal-dialog modal-pop matching-customer-details">
+            <!-- Modal content-->
+            <div class="modal-content ">
+               <div class="modal-body">
+                  <div class="matching-customer-des">
+                     <button type="button" class="close address-info" (click)="setFalse()" data-dismiss="modal"><img src="/assets/images/close.svg" alt=""></button>
+                     <div class="center-content">
+                        <span class="info-icon"><img src="/assets/images/info.svg" alt=""></span>
+                      <h2 class="welcome-user"> Hi..{{fName}} </h2><!--chandan-->
+                        <div class="existing-member-login">
+                           <div class="error-alert">
+                              <div class="alert alert-danger ">
+								  <strong>Sorry..!</strong> Your age is below 18 years .You are not eligible to open this account.
+                              </div>
+                              <div class="clearfix"></div>
+                           </div>
+                        </div>
+                        <a [routerLink]="['/home']" (click)="setFalse()" class="btn btn-secondary" data-dismiss="modal">Back</a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+<!--chandan-->
+<!--Resume appn-->
+<div id="resume-modal" class="modal fade" role="dialog">
+	<div class="modal-dialog modal-pop ">
+		<!-- Modal content-->
+		<div class="modal-content ">
+			<div class="modal-body">
+				<div class="matching-customer-des">
+					<button type="button" class="close" data-dismiss="modal"><img src="/assets/images/close.svg" alt=""></button>
+					<div class="center-content">
+
+						<div *ngIf="ticks==60 && resend==false">
+							<h5>Enter application reference number</h5>
+							<form>
+								<div class="row">
+									<div class="form-group col-md-6 col-sm-6 ">
+										<label for="appRef" class="form-label">Application ID </label>
+										<input type="text" class="form-control txtbox" id="appRef" #appRef name="appRef" placeholder="Application no" required>
+									</div>
+									<div class="form-group col-md-6 col-sm-6 ">
+										<label for="dob" class="form-label">Date of birth </label>
+										<md2-datepicker  [(ngModel)]="date_v" name="dob" #dob [required]="isRequired" [disabled]="isDisabled" [openOnFocus]="isOpenOnFocus"
+										 [isOpen]="isOpen" [type]="date" [min]="minDate" [max]="maxDate" [mode]="mode" [container]="container" #dateControl="ngModel">
+										</md2-datepicker>
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group col-md-6 col-sm-6 ">
+										<re-captcha required name="myForm" (resolved)="resolved($event)" ngDefaultControl siteKey="6LfNrxsUAAAAAIuYKBc4D14nKXKnc--gQ6G-1WJC">
+										</re-captcha>
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group col-md-4 col-sm-6">
+										<button [disabled]="!myForm" type="submit" (click)="onSearch(appRef.value)" class="btn btn-default btn-login ladda-button"
+										 data-style="expand-right" id="searchSubmit"><span class="ladda-label" name="serchSubmit"  >Send OTP</span></button>
+									</div>
+								</div>
+								<small [hidden]="wrongDetails_v==false" class="text-danger">
+                                {{configMsg?.wrongDetails}} <!--This is a required field and Can contain letters and apostrophe-->
+                                </small>
+							</form>
+
+						</div>
+
+						<div *ngIf="ticks<60 || resend==true">
+							<h5>Enter OTP</h5>
+							<form class="form-inline">
+								<div class="form-group">
+									<input type="text" class="form-control txtbox" id="verifyOtp" #verifyOtp name="verifyOtp" placeholder="Enter OTP" required>
+								</div>
+								<div class="form-group">
+
+									<button data-dismiss="modal" type="submit" (click)="onVerify(verifyOtp.value)" class="btn btn-default btn-login ladda-button"
+									 data-style="expand-right" id="verifySubmit"><span class="ladda-label" name="verifySubmit">Verify OTP</span></button>
+
+								</div>
+
+							</form>
+						</div>
+						<input type="hidden" class="form-control txtbox" id="app_id" #app_id value=appRef.value name="app_id">
+						<p *ngIf="resend==false">You can resend OTP in {{ticks}}</p>
+						<p *ngIf="resend==true">You can<a (click)="onSearch(model.application_id)" data-dismiss="modal"> resend </a>OTP in {{ticks}}</p>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--Resume appn-->
+
+<oao-footer></oao-footer>
